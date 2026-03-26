@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO Meta -->
+  <title>Community Notice Board</title>
+  <meta name="description" content="A community notice board web app to post, browse, filter, and search notices. Built with vanilla HTML, CSS, and JavaScript." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== Top Navigation Bar ===== -->
+  <header class="topbar">
+    <div class="topbar__inner">
+      <h1 class="topbar__title">📌 Community Notice Board</h1>
+      <p class="topbar__tagline">Stay informed. Stay connected.</p>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ===== Add Notice Form Section ===== -->
+    <section class="form-section" aria-label="Add a new notice">
+      <h2 class="section-title">Post a New Notice</h2>
+
+      <form id="noticeForm" class="notice-form" novalidate>
+        <!-- Title -->
+        <div class="form-group">
+          <label for="noticeTitle">Title <span class="required">*</span></label>
+          <input type="text" id="noticeTitle" placeholder="e.g. Weekend Cleanup Drive" required />
+          <span class="error-msg" id="titleError"></span>
+        </div>
+
+        <!-- Category -->
+        <div class="form-group">
+          <label for="noticeCategory">Category <span class="required">*</span></label>
+          <select id="noticeCategory" required>
+            <option value="">— Select a category —</option>
+            <option value="Events">Events</option>
+            <option value="Lost & Found">Lost &amp; Found</option>
+            <option value="Help Needed">Help Needed</option>
+            <option value="Others">Others</option>
+          </select>
+          <span class="error-msg" id="categoryError"></span>
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+          <label for="noticeDescription">Description <span class="required">*</span></label>
+          <textarea id="noticeDescription" rows="4" placeholder="Describe the notice in detail…" required></textarea>
+          <span class="error-msg" id="descriptionError"></span>
+        </div>
+
+        <!-- Expiry Date -->
+        <div class="form-group">
+          <label for="noticeExpiry">Expiry Date <span class="required">*</span></label>
+          <input type="date" id="noticeExpiry" required />
+          <span class="error-msg" id="expiryError"></span>
+        </div>
+
+        <button type="submit" class="btn btn--primary" id="submitBtn">
+          ➕ Post Notice
+        </button>
+      </form>
+    </section>
+
+    <!-- ===== Toolbar: Search + Filter ===== -->
+    <section class="toolbar" aria-label="Search and filter notices">
+      <!-- Search -->
+      <div class="toolbar__search">
+        <input type="text" id="searchInput" placeholder="🔍  Search notices…" />
+      </div>
+
+      <!-- Category Filters -->
+      <div class="toolbar__filters" id="filterContainer">
+        <button class="filter-btn active" data-category="All">All</button>
+        <button class="filter-btn" data-category="Events">Events</button>
+        <button class="filter-btn" data-category="Lost & Found">Lost &amp; Found</button>
+        <button class="filter-btn" data-category="Help Needed">Help Needed</button>
+        <button class="filter-btn" data-category="Others">Others</button>
+      </div>
+    </section>
+
+    <!-- ===== Notices Grid ===== -->
+    <section class="notices-section" aria-label="Notices list">
+      <div class="notices-grid" id="noticesGrid">
+        <!-- Cards are dynamically injected here by JS -->
+      </div>
+
+      <!-- Empty state (shown when no notices match) -->
+      <div class="empty-state hidden" id="emptyState">
+        <span class="empty-state__icon">📭</span>
+        <p>No notices available.</p>
+        <p class="empty-state__sub">Post one using the form above!</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <p>&copy; 2026 Community Notice Board &mdash; Built with ❤️ using HTML, CSS &amp; JS</p>
+  </footer>
+
+  <!-- ===== Delete Confirmation Modal ===== -->
+  <div class="modal-overlay hidden" id="deleteModal">
+    <div class="modal">
+      <h3 class="modal__title">Delete Notice?</h3>
+      <p class="modal__body">Are you sure you want to remove this notice? This action cannot be undone.</p>
+      <div class="modal__actions">
+        <button class="btn btn--secondary" id="cancelDelete">Cancel</button>
+        <button class="btn btn--danger" id="confirmDelete">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Application Script -->
+  <script src="script.js"></script>
+</body>
+</html>
